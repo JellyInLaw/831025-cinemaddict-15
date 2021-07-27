@@ -4,7 +4,12 @@ const path = require('path');
    entry: './src/main.js',
    output: {
      filename: 'bundle.js',
-     path: path.resolve(__dirname, 'public/js'),
+     path: path.resolve(__dirname, 'public'),
    },
-   devtool: 'source-map'
+   devtool: 'source-map',
+   devServer: {
+     contentBase: path.resolve(__dirname, 'public'),
+     watchContentBase: true,
+     port:3000
+   }
  };
