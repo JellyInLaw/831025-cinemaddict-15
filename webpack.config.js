@@ -11,5 +11,6 @@ const path = require('path');
      contentBase: path.resolve(__dirname, 'public'),
      watchContentBase: true,
      port:3000
-   }
+   },
+   watch: true,
  };
