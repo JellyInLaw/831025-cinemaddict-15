@@ -7,11 +7,13 @@ import { createFilmCardTemplate } from './view/film-card.js';
 import { createShowMoreButton } from './view/show-more-button.js';
 import { createFilmsListExtra } from './view/films-list--extra.js';
 import { createFooterStatistics } from './view/footer-statistics.js';
+import { getMovie } from './mock/data.js';
 // import { createFilmDetails } from './view/film-details.js';
 
 const CARD_COUNT = 5;
 const EXTRA_BLOCK_COUNT = 2;
 const EXTRA_BLOCK_CARDS_COUNT = 2;
+const MOCK_DATA_COUNT = 30;
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place,template);
@@ -62,6 +64,8 @@ for (let i = 0 ; i < EXTRA_BLOCK_CARDS_COUNT ; i ++) {
 
 const footerStatistics = document.querySelector('.footer__statistics');
 render(footerStatistics,createFooterStatistics(),'beforeend');
+
+const mockData = new Array(MOCK_DATA_COUNT).fill(null).map(() => getMovie());
 
 //adding a popup
 // const body = document.querySelector('.page-body');
