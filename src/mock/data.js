@@ -44,7 +44,7 @@ const getCommentText = () => {
   ];
   const comment = new Array(getRandomInteger(0,5))
     .fill(null)
-    .map(() => COMMENTS_TEXT[getRandomInteger(0,COMMENTS_TEXT.length)])
+    .map(() => COMMENTS_TEXT[getRandomInteger(0,COMMENTS_TEXT.length - 1)])
     .join();
 
   if (comment === '') {
@@ -82,7 +82,7 @@ const getComment = () => {
   ];
   const comment = {
     id:getUniqueNumber(),
-    author: COMMENT_AUTHORS[getRandomInteger(0,COMMENT_AUTHORS.length)],
+    author: COMMENT_AUTHORS[getRandomInteger(0,COMMENT_AUTHORS.length - 1)],
     comment: getCommentText(),
     date: generateDate(-365),
     emotion: getEmotion(),
@@ -102,7 +102,7 @@ const getAgeRateng = () => {
   const AGE_RATINGS = [
     0,3,6,12,16,18,
   ];
-  return AGE_RATINGS[getRandomInteger(0,AGE_RATINGS.length)];
+  return AGE_RATINGS[getRandomInteger(0,AGE_RATINGS.length - 1)];
 };
 
 const getDirector = () => {
@@ -120,7 +120,7 @@ const getDirector = () => {
     'Richard Allan Salomon',
   ];
 
-  return DIRECTORS[getRandomInteger(0,DIRECTORS.length)];
+  return DIRECTORS[getRandomInteger(0,DIRECTORS.length - 1)];
 };
 
 const getWriters = () => {
@@ -136,7 +136,7 @@ const getWriters = () => {
     'Peter Sullivan',
   ];
 
-  return WRITERS.slice(0,getRandomInteger(1,WRITERS.length));
+  return WRITERS.slice(0,getRandomInteger(1,WRITERS.length - 1));
 };
 
 const getActors = () => {
@@ -154,7 +154,7 @@ const getActors = () => {
     'Farīd Murād Ibrāhīm Al Ahmad',
   ];
 
-  return ACTORS.slice(0,getRandomInteger(1,ACTORS.length));
+  return ACTORS.slice(0,getRandomInteger(1,ACTORS.length - 1));
 };
 
 const getCountry = () => {
@@ -383,7 +383,7 @@ const getCountry = () => {
     'Japan',
   ];
 
-  return COUNTRIES[getRandomInteger(0,COUNTRIES.length)];
+  return COUNTRIES[getRandomInteger(0,COUNTRIES.length - 1)];
 };
 
 const getRunTime = () => getRandomInteger(22,150);
@@ -424,7 +424,7 @@ const getGenre = () => {
     'erotica',
   ];
 
-  const firstIndex = getRandomInteger(0,GENRES.length);
+  const firstIndex = getRandomInteger(0,GENRES.length - 1);
   const secondIndex = firstIndex + getRandomInteger(1,3);
 
   return GENRES.slice(firstIndex,secondIndex);
@@ -447,14 +447,13 @@ const getDescription = () => {
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis accusamus vero exercitationem impedit obcaecati, praesentium nostrum totam corporis beatae nemo quam tempore est quae ipsum maxime iusto nam quasi deserunt?',
   ];
 
-  const firstIndex = getRandomInteger(0,DESCRIPTIONS.length);
+  const firstIndex = getRandomInteger(0,DESCRIPTIONS.length - 1);
   const secondIndex = firstIndex + getRandomInteger(1,3);
 
   return DESCRIPTIONS.slice(firstIndex,secondIndex).join();
 };
 
-const getFilmInfo = () => {
-
+const getMovieTitles = () => {
   const MOVIE_TITLES = [
     'Made for each other',
     'Popeye meets Sinbad',
@@ -465,6 +464,10 @@ const getFilmInfo = () => {
     'The man with the golden arm',
   ];
 
+  return MOVIE_TITLES[getRandomInteger(0,MOVIE_TITLES.length - 1)];
+};
+
+const getPoster = () => {
   const POSTERS = [
     './images/posters/made-for-each-other.png',
     './images/posters/popeye-meets-sinbad.png',
@@ -475,36 +478,38 @@ const getFilmInfo = () => {
     './images/posters/the-man-with-the-golden-arm.jpg',
   ];
 
-  return {
-    title: MOVIE_TITLES[getRandomInteger(0,MOVIE_TITLES.length)],
-    alternativeTitle: 'none',
-    totalRating:getRandomFractional(0,10),
-    poster:POSTERS[getRandomInteger(0,POSTERS.length)],
-    ageRating: getAgeRateng(),
-    director:getDirector(),
-    writers: getWriters(),
-    actors: getActors(),
-    release: {
-      date: generateDate(-25500),
-      releaseCountry: getCountry(),
-    },
-    runTime: getRunTime(),
-    genre: getGenre(),
-    description: getDescription(),
-  };
+  return POSTERS[getRandomInteger(0,POSTERS.length - 1)];
 };
+
+const getFilmInfo = () => ({
+  title: getMovieTitles(),
+  alternativeTitle: 'none',
+  totalRating: getRandomFractional(0,10),
+  poster: getPoster(),
+  ageRating: getAgeRateng(),
+  director:getDirector(),
+  writers: getWriters(),
+  actors: getActors(),
+  release: {
+    date: generateDate(-25500),
+    releaseCountry: getCountry(),
+  },
+  runTime: getRunTime(),
+  genre: getGenre(),
+  description: getDescription(),
+});
 
 const getUserDetails = () => {
 
-  const alreadyWatched = !!getRandomInteger(0,1);
+  const alreadyWatched = Boolean(getRandomInteger(0,1));
 
   const getDate = () => generateDate(-720);
 
   return {
     alreadyWatched: alreadyWatched,
-    watchlist: alreadyWatched ? false : (!!getRandomInteger(0,1)),
+    watchList: alreadyWatched ? false : (Boolean(getRandomInteger(0,1))),
     watchingDate: alreadyWatched ? getDate() : null,
-    favorite: !!getRandomInteger(0,1),
+    favorite: Boolean(getRandomInteger(0,1)),
   };
 };
 

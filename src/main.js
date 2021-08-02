@@ -8,12 +8,14 @@ import { createShowMoreButton } from './view/show-more-button.js';
 import { createFilmsListExtra } from './view/films-list--extra.js';
 import { createFooterStatistics } from './view/footer-statistics.js';
 import { getMovie } from './mock/data.js';
-// import { createFilmDetails } from './view/film-details.js';
+import { createFilmDetails } from './view/film-details.js';
 
 const CARD_COUNT = 5;
 const EXTRA_BLOCK_COUNT = 2;
 const EXTRA_BLOCK_CARDS_COUNT = 2;
 const MOCK_DATA_COUNT = 30;
+
+const filmsData = new Array(MOCK_DATA_COUNT).fill(null).map(() => getMovie());
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place,template);
@@ -34,7 +36,7 @@ render(films,createFilmsList(),'beforeend');
 const filmListContainer = films.querySelector('.films-list__container');
 
 for (let i = 0 ; i < CARD_COUNT ; i ++) {
-  render(filmListContainer,createFilmCardTemplate(),'beforeend');
+  render(filmListContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
 }
 
 const filmsList = films.querySelector('.films-list');
@@ -51,7 +53,7 @@ const filmsListsExtra = document.querySelectorAll('.films-list--extra');
 filmsListsExtraContainer = filmsListsExtra[0].querySelector('.films-list__container');
 
 for (let i = 0 ; i < EXTRA_BLOCK_CARDS_COUNT ; i ++) {
-  render(filmsListsExtraContainer,createFilmCardTemplate(),'beforeend');
+  render(filmsListsExtraContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
 }
 
 filmsListsExtra[1].querySelector('.films-list__title').textContent = 'Most commented';
@@ -59,14 +61,11 @@ filmsListsExtra[1].querySelector('.films-list__title').textContent = 'Most comme
 filmsListsExtraContainer = filmsListsExtra[1].querySelector('.films-list__container');
 
 for (let i = 0 ; i < EXTRA_BLOCK_CARDS_COUNT ; i ++) {
-  render(filmsListsExtraContainer,createFilmCardTemplate(),'beforeend');
+  render(filmsListsExtraContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
 }
 
 const footerStatistics = document.querySelector('.footer__statistics');
 render(footerStatistics,createFooterStatistics(),'beforeend');
 
-const mockData = new Array(MOCK_DATA_COUNT).fill(null).map(() => getMovie());
-
-//adding a popup
-// const body = document.querySelector('.page-body');
-// render(body,createFilmDetails(),'beforeend');
+const body = document.querySelector('.page-body');
+render(body,createFilmDetails(),'beforeend');
