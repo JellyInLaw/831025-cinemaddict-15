@@ -26,7 +26,7 @@ const render = (container, template, place) => {
 const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
 
-render(siteHeaderElement,createProfileTemplate(),'beforeend');
+render(siteHeaderElement,createProfileTemplate(filmsData),'beforeend');
 render(siteMainElement,createSiteMenuTemplate(filmsData),'beforeend');
 render(siteMainElement,createSortTemplate(),'beforeend');
 render(siteMainElement,createFilms(),'beforeend');

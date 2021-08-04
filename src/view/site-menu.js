@@ -1,3 +1,5 @@
+
+
 export const createSiteMenuTemplate = (films) => {
 
   let watchlistCount = 0;
@@ -27,3 +29,4 @@ export const createSiteMenuTemplate = (films) => {
     <a href="#stats" class="main-navigation__additional">Stats</a>
   </nav>`;
 };
+
