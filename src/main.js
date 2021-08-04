@@ -15,6 +15,8 @@ const EXTRA_BLOCK_COUNT = 2;
 const EXTRA_BLOCK_CARDS_COUNT = 2;
 const MOCK_DATA_COUNT = 30;
 
+const body = document.querySelector('.page-body');
+
 const filmsData = new Array(MOCK_DATA_COUNT).fill(null).map(() => getMovie());
 
 const render = (container, template, place) => {
@@ -30,6 +32,30 @@ render(siteMainElement,createSortTemplate(),'beforeend');
 render(siteMainElement,createFilms(),'beforeend');
 
 const films = siteMainElement.querySelector('.films');
+
+films.addEventListener('click',(evt) => {
+
+  let clickTarget;
+
+  if (evt.target.classList.contains('film-card__poster')
+    || evt.target.classList.contains('film-card__title')
+    || evt.target.classList.contains('film-card__comments')) {
+    clickTarget = true;
+  }
+
+  if (clickTarget) {
+    body.classList.add('hide-overflow');
+    render(body,createFilmDetails(filmsData[0]),'beforeend');
+    const filmDetails = document.querySelector('.film-details');
+    const closeFilmDetails = document.querySelector('.film-details__close-btn');
+    closeFilmDetails.addEventListener('click',() => {
+      filmDetails.remove();
+      body.classList.remove('hide-overflow');
+    });
+  }
+
+
+});
 
 render(films,createFilmsList(),'beforeend');
 
@@ -66,6 +92,3 @@ for (let i = 0 ; i < EXTRA_BLOCK_CARDS_COUNT ; i ++) {
 
 const footerStatistics = document.querySelector('.footer__statistics');
 render(footerStatistics,createFooterStatistics(),'beforeend');
-
-const body = document.querySelector('.page-body');
-render(body,createFilmDetails(),'beforeend');

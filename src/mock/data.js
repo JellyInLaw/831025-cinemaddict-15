@@ -42,9 +42,9 @@ const getCommentText = () => {
     'Nunc fermentum tortor ac porta dapibus',
     'In rutrum ac purus sit amet tempus',
   ];
-  const comment = new Array(getRandomInteger(0,5))
+  const comment = new Array(getRandomInteger(1,5))
     .fill(null)
-    .map(() => COMMENTS_TEXT[getRandomInteger(0,COMMENTS_TEXT.length - 1)])
+    .map(() => COMMENTS_TEXT[getRandomInteger(1,COMMENTS_TEXT.length - 1)])
     .join();
 
   if (comment === '') {
@@ -100,7 +100,7 @@ const getComments = () => {
 
 const getAgeRateng = () => {
   const AGE_RATINGS = [
-    0,3,6,12,16,18,
+    '0+','3+','6+','12+','16+','18+',
   ];
   return AGE_RATINGS[getRandomInteger(0,AGE_RATINGS.length - 1)];
 };
