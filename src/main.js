@@ -89,4 +89,4 @@ for (let i = 0 ; i < EXTRA_BLOCK_CARDS_COUNT ; i ++) {
 }
 
 const footerStatistics = document.querySelector('.footer__statistics');
-render(footerStatistics,createFooterStatistics(),'beforeend');
+render(footerStatistics,createFooterStatistics(filmsData),'beforeend');

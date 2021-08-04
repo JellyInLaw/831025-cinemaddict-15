@@ -1,1 +1,4 @@
-export const createFooterStatistics = () => ('<p>130 291 movies inside</p>');
+export const createFooterStatistics = (films) => {
+  const filmsCount = films.length;
+  return   `<p>${filmsCount} movies inside</p>`;
+};
