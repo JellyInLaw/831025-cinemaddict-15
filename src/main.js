@@ -27,7 +27,7 @@ const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
 
 render(siteHeaderElement,createProfileTemplate(),'beforeend');
-render(siteMainElement,createSiteMenuTemplate(),'beforeend');
+render(siteMainElement,createSiteMenuTemplate(filmsData),'beforeend');
 render(siteMainElement,createSortTemplate(),'beforeend');
 render(siteMainElement,createFilms(),'beforeend');
 
@@ -53,8 +53,6 @@ films.addEventListener('click',(evt) => {
       body.classList.remove('hide-overflow');
     });
   }
-
-
 });
 
 render(films,createFilmsList(),'beforeend');
