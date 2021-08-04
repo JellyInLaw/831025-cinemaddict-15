@@ -8,14 +8,12 @@ import { createShowMoreButton } from './view/show-more-button.js';
 import { createFilmsListExtra } from './view/films-list--extra.js';
 import { createFooterStatistics } from './view/footer-statistics.js';
 import { getMovie } from './mock/data.js';
-import { createFilmDetails } from './view/film-details.js';
+import { filmsClickHandler } from './view/films-click-handler.js';
 
 const CARD_COUNT = 5;
 const EXTRA_BLOCK_COUNT = 2;
 const EXTRA_BLOCK_CARDS_COUNT = 2;
 const MOCK_DATA_COUNT = 30;
-
-const body = document.querySelector('.page-body');
 
 const filmsData = new Array(MOCK_DATA_COUNT).fill(null).map(() => getMovie());
 
@@ -34,25 +32,7 @@ render(siteMainElement,createFilms(),'beforeend');
 const films = siteMainElement.querySelector('.films');
 
 films.addEventListener('click',(evt) => {
-
-  let clickTarget;
-
-  if (evt.target.classList.contains('film-card__poster')
-    || evt.target.classList.contains('film-card__title')
-    || evt.target.classList.contains('film-card__comments')) {
-    clickTarget = true;
-  }
-
-  if (clickTarget) {
-    body.classList.add('hide-overflow');
-    render(body,createFilmDetails(filmsData[0]),'beforeend');
-    const filmDetails = document.querySelector('.film-details');
-    const closeFilmDetails = document.querySelector('.film-details__close-btn');
-    closeFilmDetails.addEventListener('click',() => {
-      filmDetails.remove();
-      body.classList.remove('hide-overflow');
-    });
-  }
+  filmsClickHandler(evt,filmsData[0]);
 });
 
 render(films,createFilmsList(),'beforeend');
@@ -90,3 +70,5 @@ for (let i = 0 ; i < EXTRA_BLOCK_CARDS_COUNT ; i ++) {
 
 const footerStatistics = document.querySelector('.footer__statistics');
 render(footerStatistics,createFooterStatistics(filmsData),'beforeend');
+
+export {render};

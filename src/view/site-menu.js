@@ -1,5 +1,3 @@
-
-
 export const createSiteMenuTemplate = (films) => {
 
   let watchlistCount = 0;
