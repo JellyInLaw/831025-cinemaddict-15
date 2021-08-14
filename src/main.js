@@ -9,6 +9,7 @@ import { createShowMoreButton } from './view/show-more-button.js';
 import { createFooterStatistics } from './view/footer-statistics.js';
 import { getMovie } from './mock/data.js';
 import { filmsClickHandler } from './view/films-click-handler.js';
+import { renderTemplate } from './utils.js';
 
 const CARD_COUNT = 5;
 // const EXTRA_BLOCK_COUNT = 2;
@@ -17,17 +18,13 @@ const MOCK_DATA_COUNT = 12;
 
 const filmsData = new Array(MOCK_DATA_COUNT).fill(null).map(() => getMovie());
 
-const render = (container, template, place) => {
-  container.insertAdjacentHTML(place,template);
-};
-
 const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
 
-render(siteHeaderElement,createProfileTemplate(filmsData),'beforeend');
-render(siteMainElement,createSiteMenuTemplate(filmsData),'beforeend');
-render(siteMainElement,createSortTemplate(),'beforeend');
-render(siteMainElement,createFilms(),'beforeend');
+renderTemplate(siteHeaderElement,createProfileTemplate(filmsData),'beforeend');
+renderTemplate(siteMainElement,createSiteMenuTemplate(filmsData),'beforeend');
+renderTemplate(siteMainElement,createSortTemplate(),'beforeend');
+renderTemplate(siteMainElement,createFilms(),'beforeend');
 
 const films = siteMainElement.querySelector('.films');
 
@@ -35,17 +32,17 @@ films.addEventListener('click',(evt) => {
   filmsClickHandler(evt,filmsData[0]);
 });
 
-render(films,createFilmsList(),'beforeend');
+renderTemplate(films,createFilmsList(),'beforeend');
 
 const filmListContainer = films.querySelector('.films-list__container');
 
 for (let i = 0 ; i < CARD_COUNT ; i ++) {
-  render(filmListContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
+  renderTemplate(filmListContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
 }
 
 const filmsList = films.querySelector('.films-list');
 
-render(filmsList,createShowMoreButton(),'beforeend');
+renderTemplate(filmsList,createShowMoreButton(),'beforeend');
 
 const showMoreButton = document.querySelector('.films-list__show-more');
 showMoreButton.addEventListener('click',() => {
@@ -58,12 +55,12 @@ showMoreButton.addEventListener('click',() => {
     showMoreButton.classList.add('visually-hidden');
   }
   filmsToView.forEach((element) => {
-    render(filmListContainer,createFilmCardTemplate(element),'beforeend');
+    renderTemplate(filmListContainer,createFilmCardTemplate(element),'beforeend');
   });
 });
 
 // for (let i = 0 ; i < EXTRA_BLOCK_COUNT ; i ++) {
-//   render(films,createFilmsListExtra(),'beforeend');
+//   renderTemplate(films,createFilmsListExtra(),'beforeend');
 // }
 
 // let filmsListsExtraContainer;
@@ -72,7 +69,7 @@ showMoreButton.addEventListener('click',() => {
 // filmsListsExtraContainer = filmsListsExtra[0].querySelector('.films-list__container');
 
 // for (let i = 0 ; i < EXTRA_BLOCK_CARDS_COUNT ; i ++) {
-//   render(filmsListsExtraContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
+//   renderTemplate(filmsListsExtraContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
 // }
 
 // filmsListsExtra[1].querySelector('.films-list__title').textContent = 'Most commented';
@@ -80,10 +77,9 @@ showMoreButton.addEventListener('click',() => {
 // filmsListsExtraContainer = filmsListsExtra[1].querySelector('.films-list__container');
 
 // for (let i = 0 ; i < EXTRA_BLOCK_CARDS_COUNT ; i ++) {
-//   render(filmsListsExtraContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
+//   renderTemplate(filmsListsExtraContainer,createFilmCardTemplate(filmsData[i]),'beforeend');
 // }
 
 const footerStatistics = document.querySelector('.footer__statistics');
-render(footerStatistics,createFooterStatistics(filmsData),'beforeend');
+renderTemplate(footerStatistics,createFooterStatistics(filmsData),'beforeend');
 
-export {render};

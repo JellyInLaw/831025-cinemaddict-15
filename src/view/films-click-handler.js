@@ -1,5 +1,5 @@
 import { createFilmDetails } from './film-details.js';
-import { render } from '../main.js';
+import { renderTemplate } from '../utils.js';
 
 export const filmsClickHandler = (evt,film) => {
 
@@ -14,7 +14,7 @@ export const filmsClickHandler = (evt,film) => {
 
   if (clickTarget) {
     body.classList.add('hide-overflow');
-    render(body,createFilmDetails(film),'beforeend');
+    renderTemplate(body,createFilmDetails(film),'beforeend');
     const filmDetails = document.querySelector('.film-details');
     const closeFilmDetails = document.querySelector('.film-details__close-btn');
     closeFilmDetails.addEventListener('click',() => {
