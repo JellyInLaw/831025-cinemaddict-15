@@ -1,6 +1,6 @@
 import { createSiteMenuTemplate } from './view/site-menu.js';
 import { createProfileTemplate } from './view/profile.js';
-import { createSortTemplate } from './view/sort.js';
+import sortView from './view/sort.js';
 import { createFilms } from './view/films.js';
 import { createFilmsList } from './view/films-list.js';
 import { createFilmCardTemplate } from './view/film-card.js';
@@ -9,7 +9,7 @@ import { createShowMoreButton } from './view/show-more-button.js';
 import { createFooterStatistics } from './view/footer-statistics.js';
 import { getMovie } from './mock/data.js';
 import { filmsClickHandler } from './view/films-click-handler.js';
-import { renderTemplate } from './utils.js';
+import { renderTemplate,renderElement,RenderPosition } from './utils.js';
 
 const CARD_COUNT = 5;
 // const EXTRA_BLOCK_COUNT = 2;
@@ -23,7 +23,7 @@ const siteHeaderElement = document.querySelector('.header');
 
 renderTemplate(siteHeaderElement,createProfileTemplate(filmsData),'beforeend');
 renderTemplate(siteMainElement,createSiteMenuTemplate(filmsData),'beforeend');
-renderTemplate(siteMainElement,createSortTemplate(),'beforeend');
+renderElement(siteMainElement,new sortView().getElement(),RenderPosition.BEFOREEND);
 renderTemplate(siteMainElement,createFilms(),'beforeend');
 
 const films = siteMainElement.querySelector('.films');
