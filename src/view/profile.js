@@ -1,4 +1,6 @@
-export const createProfileTemplate = (films) => {
+import { createElement } from '../utils';
+
+const createProfileTemplate = (films) => {
   let watchedCount = 0;
   let rang = '';
 
@@ -26,3 +28,26 @@ export const createProfileTemplate = (films) => {
   </section>`;
 
 };
+
+export default class profile {
+  constructor (filmsData) {
+    this._element = null;
+    this._films = filmsData;
+  }
+
+  getTemplate (filmsData) {
+    return createProfileTemplate(filmsData);
+  }
+
+  getElement (filmsData) {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate(filmsData));
+    }
+
+    return this._element;
+  }
+
+  removeElement () {
+    this._element = null;
+  }
+}

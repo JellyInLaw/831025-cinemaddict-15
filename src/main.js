@@ -1,5 +1,5 @@
 import { createSiteMenuTemplate } from './view/site-menu.js';
-import { createProfileTemplate } from './view/profile.js';
+import profileView from './view/profile.js';
 import sortView from './view/sort.js';
 import filmsView from './view/films.js';
 import filmsListview from './view/films-list.js';
@@ -21,7 +21,7 @@ const filmsData = new Array(MOCK_DATA_COUNT).fill(null).map(() => getMovie());
 const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
 
-renderTemplate(siteHeaderElement,createProfileTemplate(filmsData),'beforeend');
+renderElement(siteHeaderElement,new profileView().getElement(filmsData),'beforeend');
 renderTemplate(siteMainElement,createSiteMenuTemplate(filmsData),'beforeend');
 renderElement(siteMainElement,new sortView().getElement(),RenderPosition.BEFOREEND);
 renderElement(siteMainElement,new filmsView().getElement(),RenderPosition.BEFOREEND);
