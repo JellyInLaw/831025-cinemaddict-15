@@ -35,13 +35,13 @@ export default class profile {
     this._films = filmsData;
   }
 
-  getTemplate (filmsData) {
-    return createProfileTemplate(filmsData);
+  getTemplate () {
+    return createProfileTemplate(this._films);
   }
 
-  getElement (filmsData) {
+  getElement () {
     if (!this._element) {
-      this._element = createElement(this.getTemplate(filmsData));
+      this._element = createElement(this.getTemplate(this.films));
     }
 
     return this._element;

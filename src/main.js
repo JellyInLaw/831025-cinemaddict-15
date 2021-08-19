@@ -21,7 +21,7 @@ const filmsData = new Array(MOCK_DATA_COUNT).fill(null).map(() => getMovie());
 const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
 
-renderElement(siteHeaderElement,new profileView().getElement(filmsData),'beforeend');
+renderElement(siteHeaderElement,new profileView(filmsData).getElement(),'beforeend');
 renderTemplate(siteMainElement,createSiteMenuTemplate(filmsData),'beforeend');
 renderElement(siteMainElement,new sortView().getElement(),RenderPosition.BEFOREEND);
 renderElement(siteMainElement,new filmsView().getElement(),RenderPosition.BEFOREEND);
