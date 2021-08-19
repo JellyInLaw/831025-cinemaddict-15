@@ -1,11 +1,11 @@
 import { createSiteMenuTemplate } from './view/site-menu.js';
 import { createProfileTemplate } from './view/profile.js';
 import sortView from './view/sort.js';
-import { createFilms } from './view/films.js';
-import { createFilmsList } from './view/films-list.js';
+import filmsView from './view/films.js';
+import filmsListview from './view/films-list.js';
 import { createFilmCardTemplate } from './view/film-card.js';
-import { createShowMoreButton } from './view/show-more-button.js';
-// import { createFilmsListExtra } from './view/films-list--extra.js';
+import showMoreButtonView from './view/show-more-button.js';
+// import filmsListExtraView from './view/films-list--extra.js';
 import { createFooterStatistics } from './view/footer-statistics.js';
 import { getMovie } from './mock/data.js';
 import { filmsClickHandler } from './view/films-click-handler.js';
@@ -24,7 +24,7 @@ const siteHeaderElement = document.querySelector('.header');
 renderTemplate(siteHeaderElement,createProfileTemplate(filmsData),'beforeend');
 renderTemplate(siteMainElement,createSiteMenuTemplate(filmsData),'beforeend');
 renderElement(siteMainElement,new sortView().getElement(),RenderPosition.BEFOREEND);
-renderTemplate(siteMainElement,createFilms(),'beforeend');
+renderElement(siteMainElement,new filmsView().getElement(),RenderPosition.BEFOREEND);
 
 const films = siteMainElement.querySelector('.films');
 
@@ -32,7 +32,7 @@ films.addEventListener('click',(evt) => {
   filmsClickHandler(evt,filmsData[0]);
 });
 
-renderTemplate(films,createFilmsList(),'beforeend');
+renderElement(films,new filmsListview().getElement(),RenderPosition.BEFOREEND);
 
 const filmListContainer = films.querySelector('.films-list__container');
 
@@ -42,7 +42,7 @@ for (let i = 0 ; i < CARD_COUNT ; i ++) {
 
 const filmsList = films.querySelector('.films-list');
 
-renderTemplate(filmsList,createShowMoreButton(),'beforeend');
+renderElement(filmsList,new showMoreButtonView().getElement(),RenderPosition.BEFOREEND);
 
 const showMoreButton = document.querySelector('.films-list__show-more');
 showMoreButton.addEventListener('click',() => {
@@ -60,7 +60,7 @@ showMoreButton.addEventListener('click',() => {
 });
 
 // for (let i = 0 ; i < EXTRA_BLOCK_COUNT ; i ++) {
-//   renderTemplate(films,createFilmsListExtra(),'beforeend');
+//   renderElement(films,new filmsListExtraView().getElement(),RenderPosition.BEFOREEND);
 // }
 
 // let filmsListsExtraContainer;

@@ -9,15 +9,15 @@ export const createSortTemplate = () => (
 );
 
 export default class sort {
-  constructor() {
+  constructor () {
     this._element = null;
   }
 
-  getTemplate() {
+  getTemplate () {
     return createSortTemplate();
   }
 
-  getElement() {
+  getElement () {
     if (!this._element) {
       this._element = createElement(this.getTemplate());
     }
@@ -25,7 +25,7 @@ export default class sort {
     return this._element;
   }
 
-  removeElement() {
+  removeElement () {
     this._element = null;
   }
 }
