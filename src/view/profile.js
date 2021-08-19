@@ -41,7 +41,7 @@ export default class profile {
 
   getElement () {
     if (!this._element) {
-      this._element = createElement(this.getTemplate(this.films));
+      this._element = createElement(this.getTemplate());
     }
 
     return this._element;

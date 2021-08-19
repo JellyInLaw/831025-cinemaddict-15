@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { getDuration } from './film-card.js';
+import { getDuration } from '../utils';
 
 export const createFilmDetails = (film) => {
 

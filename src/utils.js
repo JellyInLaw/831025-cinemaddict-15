@@ -50,3 +50,15 @@ export const createElement = (template) => {
 
   return newElement.firstChild;
 };
+
+export const getDuration = (runTime) => {
+  if (runTime / 60 > 1) {
+    const hours = Math.floor(runTime / 60);
+    const minutes = runTime % 60;
+    const duration = `${hours  }h ${  minutes  }m`;
+    return duration;
+  } else {
+    const duration = `${runTime  }m `;
+    return duration;
+  }
+};

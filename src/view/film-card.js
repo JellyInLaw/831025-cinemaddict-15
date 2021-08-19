@@ -1,18 +1,7 @@
 import dayjs from 'dayjs';
+import { createElement,getDuration } from '../utils';
 
-const getDuration = (runTime) => {
-  if (runTime / 60 > 1) {
-    const hours = Math.floor(runTime / 60);
-    const minutes = runTime % 60;
-    const duration = `${hours  }h ${  minutes  }m`;
-    return duration;
-  } else {
-    const duration = `${runTime  }m `;
-    return duration;
-  }
-};
-
-export const createFilmCardTemplate = (film) => {
+const createFilmCardTemplate = (film) => {
 
   const title = film.filmInfo.title;
   const rating = film.filmInfo.totalRating;
@@ -60,4 +49,25 @@ export const createFilmCardTemplate = (film) => {
         </article>`;
 };
 
-export {getDuration};
+export default class filmCard {
+  constructor (film) {
+    this._element = null;
+    this._film = film;
+  }
+
+  getTemplate () {
+    return createFilmCardTemplate(this._film);
+  }
+
+  getElement () {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement () {
+    this._element = null;
+  }
+}
