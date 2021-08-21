@@ -23,8 +23,8 @@ const siteHeaderElement = document.querySelector('.header');
 
 const renderFilm = (filmsListContainer,film) => {
   const card = new filmCardView(film);
+  const body = document.querySelector('.page-body');
   const openPopup = () => {
-    const body = document.querySelector('.page-body');
     body.classList.add('hide-overflow');
     const popup = new filmDetailsView(film).getElement();
     render(body,popup,RenderPosition.BEFOREEND);
@@ -51,18 +51,27 @@ const renderFilm = (filmsListContainer,film) => {
     .getElement()
     .querySelector('.film-card__poster')
     .addEventListener('click',() => {
+      if (body.lastElementChild.classList.contains('film-details')) {
+        body.lastElementChild.remove();
+      }
       openPopup(film);
     });
   card
     .getElement()
     .querySelector('.film-card__title')
     .addEventListener('click',() => {
+      if (body.lastElementChild.classList.contains('film-details')) {
+        body.lastElementChild.remove();
+      }
       openPopup(film);
     });
   card
     .getElement()
     .querySelector('.film-card__comments')
     .addEventListener('click',() => {
+      if (body.lastElementChild.classList.contains('film-details')) {
+        body.lastElementChild.remove();
+      }
       openPopup(film);
     });
 };
