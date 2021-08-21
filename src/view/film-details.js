@@ -241,7 +241,7 @@ export const createFilmDetails = (film) => {
 </section>`;
 };
 
-export default class filmDetails {
+export default class FilmDetails {
   constructor (film) {
     this._element = null;
     this._film = film;

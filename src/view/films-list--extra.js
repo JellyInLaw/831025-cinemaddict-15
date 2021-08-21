@@ -8,7 +8,7 @@ const createFilmsListExtra = () => (
     </section>`
 );
 
-export default class filmsListExtra {
+export default class FilmsListExtra {
   constructor () {
     this._element = null;
   }

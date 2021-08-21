@@ -29,7 +29,7 @@ const createProfileTemplate = (films) => {
 
 };
 
-export default class profile {
+export default class Profile {
   constructor (filmsData) {
     this._element = null;
     this._films = filmsData;

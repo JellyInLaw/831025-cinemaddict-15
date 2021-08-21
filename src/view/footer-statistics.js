@@ -5,7 +5,7 @@ const createFooterStatistics = (films) => {
   return   `<p>${filmsCount} movies inside</p>`;
 };
 
-export default class footerStatistics {
+export default class FooterStatistics {
   constructor (filmsCount) {
     this._element = null;
     this._filmsCount = filmsCount;

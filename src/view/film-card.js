@@ -49,7 +49,7 @@ const createFilmCardTemplate = (film) => {
         </article>`;
 };
 
-export default class filmCard {
+export default class FilmCard {
   constructor (film) {
     this._element = null;
     this._film = film;

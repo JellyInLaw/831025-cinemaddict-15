@@ -29,7 +29,7 @@ const createSiteMenuTemplate = (films) => {
   </nav>`;
 };
 
-export default class siteMenu {
+export default class SiteMenu {
   constructor (filmsData) {
     this._element = null;
     this._films = filmsData;

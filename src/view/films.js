@@ -5,7 +5,7 @@ const createFilms = () => (
   </section>`
 );
 
-export default class films {
+export default class Films {
   constructor () {
     this._element = null;
   }
