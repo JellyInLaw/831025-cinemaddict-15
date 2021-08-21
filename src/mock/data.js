@@ -1,30 +1,7 @@
 import dayjs from 'dayjs';
-
-const getRandomInteger = (min, max) => {
-  const rand = min - 0.5 + Math.random() * (max - min + 1);
-  return Math.round(rand);
-};
-
-const getRandomFractional = (min,max) => {
-  const rand = min + Math.random() * (max - min + 1);
-  return rand.toFixed(1);
-};
-
-const makeUniqueRandomInteger = (min, max) => {
-  const previousValues = [];
-
-  return () => {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      throw new Error(`Перебраны все числа из диапазона от ${  min  } до ${  max}`);
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-};
+import { getRandomInteger } from '../utils';
+import { getRandomFractional } from '../utils';
+import { makeUniqueRandomInteger } from '../utils';
 
 const getUniqueNumber = makeUniqueRandomInteger(1,9999);
 
