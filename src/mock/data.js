@@ -461,7 +461,7 @@ const getPoster = () => {
 const getFilmInfo = () => ({
   title: getMovieTitles(),
   alternativeTitle: 'none',
-  totalRating: getRandomFractional(0,10),
+  totalRating: parseFloat(getRandomFractional(0,10),10) ,
   poster: getPoster(),
   ageRating: getAgeRateng(),
   director:getDirector(),
