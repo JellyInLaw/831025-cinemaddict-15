@@ -24,12 +24,12 @@ const renderFilm = (filmsListContainer,film) => {
   const body = document.querySelector('.page-body');
   const openPopup = () => {
     body.classList.add('hide-overflow');
-    const popup = new FilmDetailsView(film).getElement();
-    render(body,popup,RenderPosition.BEFOREEND);
+    const popup = new FilmDetailsView(film);
+    render(body,popup.getElement(),RenderPosition.BEFOREEND);
     const onEscKeyDown = (evt) => {
       if (evt.key === 'Escape' || evt.key === 'Esc') {
         evt.preventDefault();
-        popup.remove();
+        popup.getElement().remove();
         document.removeEventListener('keydown', onEscKeyDown);
         body.classList.remove('hide-overflow');
       }
@@ -37,10 +37,12 @@ const renderFilm = (filmsListContainer,film) => {
 
     document.addEventListener('keydown', onEscKeyDown);
 
-    popup.querySelector('.film-details__close-btn').addEventListener('click',() => {
-      popup.remove();
-      body.classList.remove('hide-overflow');
-      document.removeEventListener('keydown', onEscKeyDown);
+    popup.setClickHandler((evt) => {
+      if (evt.target.classList.contains('film-details__close-btn')) {
+        popup.getElement().remove();
+        body.classList.remove('hide-overflow');
+        document.removeEventListener('keydown', onEscKeyDown);
+      }
     });
   };
 
@@ -52,13 +54,13 @@ const renderFilm = (filmsListContainer,film) => {
         body.lastElementChild.remove();
       }
       if (evt.target.classList.contains('film-card__poster')) {
-        openPopup(film);
+        openPopup();
       }
       if (evt.target.classList.contains('film-card__comments')) {
-        openPopup(film);
+        openPopup();
       }
       if (evt.target.classList.contains('film-card__title')) {
-        openPopup(film);
+        openPopup();
       }
     });
 };
