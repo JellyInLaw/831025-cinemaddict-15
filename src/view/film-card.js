@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
-import { createElement,getDuration } from '../utils';
+import { getDuration } from '../utils/utils.js';
+import AbstractView from './abstract';
 
 const createFilmCardTemplate = (film) => {
 
@@ -49,25 +50,24 @@ const createFilmCardTemplate = (film) => {
         </article>`;
 };
 
-export default class filmCard {
+export default class FilmCard extends AbstractView {
   constructor (film) {
-    this._element = null;
+    super();
     this._film = film;
+    this._clickHandler = this._clickHandler.bind(this);
   }
 
   getTemplate () {
     return createFilmCardTemplate(this._film);
   }
 
-  getElement () {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  _clickHandler(evt) {
+    this._callback.click(evt);
   }
 
-  removeElement () {
-    this._element = null;
+  setClickHandler (callback) {
+    this._callback.click = callback;
+    this.getElement().addEventListener('click', this._clickHandler);
   }
+
 }

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { getRandomInteger } from '../utils';
-import { getRandomFractional } from '../utils';
-import { makeUniqueRandomInteger } from '../utils';
+import { getRandomInteger } from '../utils/utils.js';
+import { getRandomFractional } from '../utils/utils.js';
+import { makeUniqueRandomInteger } from '../utils/utils.js';
 
 const getUniqueNumber = makeUniqueRandomInteger(1,9999);
 
@@ -461,7 +461,7 @@ const getPoster = () => {
 const getFilmInfo = () => ({
   title: getMovieTitles(),
   alternativeTitle: 'none',
-  totalRating: getRandomFractional(0,10),
+  totalRating: parseFloat(getRandomFractional(0,10),10) ,
   poster: getPoster(),
   ageRating: getAgeRateng(),
   director:getDirector(),
