@@ -34,6 +34,7 @@ const renderFilm = (filmsListContainer,film) => {
         body.classList.remove('hide-overflow');
       }
     };
+
     document.addEventListener('keydown', onEscKeyDown);
 
     popup.querySelector('.film-details__close-btn').addEventListener('click',() => {
@@ -46,31 +47,19 @@ const renderFilm = (filmsListContainer,film) => {
   render(filmsListContainer,card.getElement(),RenderPosition.BEFOREEND);
 
   card
-    .getElement()
-    .querySelector('.film-card__poster')
-    .addEventListener('click',() => {
+    .setClickHandler((evt) => {
       if (body.lastElementChild.classList.contains('film-details')) {
         body.lastElementChild.remove();
       }
-      openPopup(film);
-    });
-  card
-    .getElement()
-    .querySelector('.film-card__title')
-    .addEventListener('click',() => {
-      if (body.lastElementChild.classList.contains('film-details')) {
-        body.lastElementChild.remove();
+      if (evt.target.classList.contains('film-card__poster')) {
+        openPopup(film);
       }
-      openPopup(film);
-    });
-  card
-    .getElement()
-    .querySelector('.film-card__comments')
-    .addEventListener('click',() => {
-      if (body.lastElementChild.classList.contains('film-details')) {
-        body.lastElementChild.remove();
+      if (evt.target.classList.contains('film-card__comments')) {
+        openPopup(film);
       }
-      openPopup(film);
+      if (evt.target.classList.contains('film-card__title')) {
+        openPopup(film);
+      }
     });
 };
 
@@ -91,17 +80,18 @@ for (let i = 0 ; i < CARD_COUNT ; i ++) {
 
 const filmsList = films.querySelector('.films-list');
 
-render(filmsList,new ShowMoreButtonView().getElement(),RenderPosition.BEFOREEND);
+const showMoreButton = new ShowMoreButtonView();
 
-const showMoreButton = document.querySelector('.films-list__show-more');
-showMoreButton.addEventListener('click',() => {
+render(filmsList,showMoreButton.getElement(),RenderPosition.BEFOREEND);
+
+showMoreButton.setClickHandler(() => {
   const filmsOnPage = filmListContainer.querySelectorAll('.film-card').length;
   if (filmsOnPage === filmsData.length) {
-    showMoreButton.classList.add('visually-hidden');
+    showMoreButton.getElement().classList.add('visually-hidden');
   }
   const filmsToView = filmsData.slice(filmsOnPage,filmsOnPage + 5);
   if ((filmsOnPage + 5) >= filmsData.length) {
-    showMoreButton.classList.add('visually-hidden');
+    showMoreButton.getElement().classList.add('visually-hidden');
   }
   filmsToView.forEach((element) => {
     renderFilm(filmListContainer,element);
