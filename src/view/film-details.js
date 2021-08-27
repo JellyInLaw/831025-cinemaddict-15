@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { getDuration } from '../utils';
+import { getDuration } from '../utils/utils.js';
 import AbstractView from './abstract';
 
 export const createFilmDetails = (film) => {

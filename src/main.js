@@ -9,7 +9,7 @@ import ShowMoreButtonView from './view/show-more-button.js';
 import FilmsListExtraView from './view/films-list--extra.js';
 import FooterStatisticsView from './view/footer-statistics.js';
 import { getMovie } from './mock/data.js';
-import { render,RenderPosition } from './utils.js';
+import { render,RenderPosition } from './utils/render.js';
 
 const CARD_COUNT = 5;
 const MOCK_DATA_COUNT = 12;
@@ -25,7 +25,7 @@ const renderFilm = (filmsListContainer,film) => {
   const openPopup = () => {
     body.classList.add('hide-overflow');
     const popup = new FilmDetailsView(film);
-    render(body,popup.getElement(),RenderPosition.BEFOREEND);
+    render(body,popup,RenderPosition.BEFOREEND);
     const onEscKeyDown = (evt) => {
       if (evt.key === 'Escape' || evt.key === 'Esc') {
         evt.preventDefault();
@@ -46,7 +46,7 @@ const renderFilm = (filmsListContainer,film) => {
     });
   };
 
-  render(filmsListContainer,card.getElement(),RenderPosition.BEFOREEND);
+  render(filmsListContainer,card,RenderPosition.BEFOREEND);
 
   card
     .setClickHandler((evt) => {
@@ -65,14 +65,14 @@ const renderFilm = (filmsListContainer,film) => {
     });
 };
 
-render(siteHeaderElement,new ProfileView(filmsData).getElement(),RenderPosition.BEFOREEND);
-render(siteMainElement,new SiteMenuView(filmsData).getElement(),RenderPosition.BEFOREEND);
-render(siteMainElement,new SortView().getElement(),RenderPosition.BEFOREEND);
-render(siteMainElement,new FilmsView().getElement(),RenderPosition.BEFOREEND);
+render(siteHeaderElement,new ProfileView(filmsData),RenderPosition.BEFOREEND);
+render(siteMainElement,new SiteMenuView(filmsData),RenderPosition.BEFOREEND);
+render(siteMainElement,new SortView(),RenderPosition.BEFOREEND);
+render(siteMainElement,new FilmsView(),RenderPosition.BEFOREEND);
 
 const films = siteMainElement.querySelector('.films');
 
-render(films,new FilmsListview().getElement(),RenderPosition.BEFOREEND);
+render(films,new FilmsListview(),RenderPosition.BEFOREEND);
 
 const filmListContainer = films.querySelector('.films-list__container');
 
@@ -84,7 +84,7 @@ const filmsList = films.querySelector('.films-list');
 
 const showMoreButton = new ShowMoreButtonView();
 
-render(filmsList,showMoreButton.getElement(),RenderPosition.BEFOREEND);
+render(filmsList,showMoreButton,RenderPosition.BEFOREEND);
 
 showMoreButton.setClickHandler(() => {
   const filmsOnPage = filmListContainer.querySelectorAll('.film-card').length;
